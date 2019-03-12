@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+
+spring.batch.job.names: ${job.name:NONE}
+logging.level.org.springframework.batch: DEBUG
+
+---
+spring:
+  profiles: dev
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/spring_batch?serverTimezone=UTC
+      username: root
+      password: mysqlpwd
+      driver-class-name: com.mysql.cj.jdbc.Driver
+

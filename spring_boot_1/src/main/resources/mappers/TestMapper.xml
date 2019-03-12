@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.boot">
+
+	<resultMap type="com.spring.batch.domain.User" id="resultMap">
+		<result property="userIdx" column="user_idx"/>
+		<result property="userName" column="user_name"/>
+		<result property="email" column="email"/>
+	</resultMap>
+
+	<select id="getUser" resultMap="resultMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM (
+				SELECT
+					*
+				FROM USER
+				ORDER BY USER_IDX ASC
+			) A
+		]]>
+	</select>
+	
+	<insert id="createUser" parameterType="com.spring.batch.domain.User">
+		INSERT INTO USER_COPY
+		VALUES (#{userIdx}, #{userName}, #{email})
+	</insert>
+</mapper>
